@@ -1,6 +1,6 @@
 import argparse
 
-from abc.github import client
+from abc_ctl.github import client
 
 
 def get_parser():
@@ -20,8 +20,7 @@ def main():
     user = client.Client(username, password)
     user.authenticate()
 
-    user._check_repo_exist()
-
+    user.create_repo()
 
 if __name__ == '__main__':
     main()
