@@ -1,7 +1,7 @@
 import github
 
 
-class Client(object):
+class GithubClient(object):
     def __init__(self, username, password):
         self.username = username
         self.password = password
@@ -18,5 +18,5 @@ class Client(object):
                 return True
 
     def create_repo(self):
-        if not _check_repo_exist():
-            self.user.get_user().create_repo('abc')
+        if not self._check_repo_exist():
+            self.user.create_repo('abc')
