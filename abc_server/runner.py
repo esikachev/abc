@@ -3,6 +3,7 @@ import argparse
 from abc_server.github import client
 from abc_server.flask import abc_server
 
+
 def get_parser():
     parser = argparse.ArgumentParser(description="Abc server.")
     parser.add_argument('--email', '-e', default=None, nargs='?',
