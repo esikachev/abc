@@ -1,11 +1,7 @@
 import argparse
-import flask
 
 from abc_server.github import client
-
-abc_server = flask.Flask(__name__)
-abc_server.url_map.strict_slashes = False
-
+from abc_server.flask import abc_server
 
 def get_parser():
     parser = argparse.ArgumentParser(description="Abc server.")
@@ -16,7 +12,6 @@ def get_parser():
     return parser.parse_args()
 
 
-@abc_server.route('/')
 def main():
     args = get_parser()
     email = args.email
@@ -25,7 +20,7 @@ def main():
     user = client.GithubClient(email, password)
     user.authenticate()
 
-    user.create_repo()
+    abc_server.run(debug=True) 
 
 
 if __name__ == '__main__':
