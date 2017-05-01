@@ -15,8 +15,12 @@ class GithubClient(object):
         for repo in self.user.get_repos():
             if 'abc' == repo.name:
                 print 'Repo abc exist'
-                return True
+                return repo
+        return False
 
     def create_repo(self):
-        if not self._check_repo_exist():
-            self.user.create_repo('abc')
+        repo = self._check_repo_exist()
+        if not repo:
+            return self.user.create_repo('abc')
+
+        return repo

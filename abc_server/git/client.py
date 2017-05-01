@@ -2,11 +2,12 @@ import os
 
 import gittle
 
+from abc_server import utils
+
 
 class GitClient(object):
     def __init__(self, repo_url):
-        self.user_home_dir = "{}".format(os.environ.get('HOME'))
-        self.dir_path = "{}/.abc".format(self.user_home_dir)
+        self.dir_path = utils.from_home_dir(".abc")
         self.repo_url = repo_url
         self.repo = None
 
@@ -28,7 +29,7 @@ class GitClient(object):
     def commit(self):
         untracked_files = self.repo.untracked_files
         changed_files = self.repo.modified_files
-        
+
         self.repo.add(untracked_files)
         self.repo.stage(changed_files)
 
@@ -37,7 +38,4 @@ class GitClient(object):
     def push(self):
         remote_repo = gittle.Gittle(self.dir_path, origin_uri=self.repo_url)
 
-        key_file = open('{}/.ssh/id_rsa'.format(self.user_home_dir))
-
         remote_repo.push()
-

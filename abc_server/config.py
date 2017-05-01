@@ -1,4 +1,3 @@
-import os
 from abc_server import utils
 
 
@@ -8,7 +7,7 @@ DEFAULT_TEMPLATE = {
     ],
 }
 
-DEFAULT_CONFIG_PATH = "{}/.abc/abc_config.yaml".format(os.environ.get('HOME'))
+DEFAULT_CONFIG_PATH = utils.from_home_dir(".abc/abc_config.yaml")
 
 
 def create_default_config():

@@ -1,4 +1,12 @@
+import os
+
 import yaml
+
+
+def from_home_dir(path=None):
+    if not path:
+        return os.environ.get('HOME')
+    return "{0}/{1}".format(os.environ.get('HOME'), path)
 
 
 def read_from_file(file_name):
@@ -7,8 +15,8 @@ def read_from_file(file_name):
 
 
 def write_to_file(file_name, data):
-        with open(file_name, "w") as f:
-            yaml.dump(data, f)
+    with open(file_name, "w") as f:
+        yaml.dump(data, f)
 
 
 class YamlEditor(object):
