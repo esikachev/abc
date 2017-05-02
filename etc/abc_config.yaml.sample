@@ -1,0 +1,3 @@
+watch:
+   - .vimrc
+   - /etc/resolv.conf
