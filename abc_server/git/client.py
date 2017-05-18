@@ -2,13 +2,17 @@ import os
 
 import gittle
 
+from abc_server import config
 from abc_server import utils
 
 
 class GitClient(object):
-    def __init__(self, repo_url):
+    def __init__(self, repo_url=None):
         self.dir_path = utils.from_home_dir(".abc")
         self.repo_url = repo_url
+        if repo_url is None:
+            configs = config.read_config()
+            self.repo_url = configs['repo_url']
         self.repo = None
 
     def _check_is_local_repo_exist(self):
@@ -27,6 +31,8 @@ class GitClient(object):
         self.clone()
 
     def commit(self):
+        gittle.Gittle(self.dir_path)
+        self.repo = gittle.Gittle(self.dir_path, origin_uri=self.repo_url)
         untracked_files = self.repo.untracked_files
         changed_files = self.repo.modified_files
 
