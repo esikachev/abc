@@ -16,7 +16,7 @@ def read_from_file(file_name):
 
 def write_to_file(file_name, data):
     with open(file_name, "w") as f:
-        yaml.dump(data, f)
+        yaml.safe_dump(data, f, default_flow_style=False)
 
 
 class YamlEditor(object):
