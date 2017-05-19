@@ -36,10 +36,14 @@ class GitClient(object):
         untracked_files = self.repo.untracked_files
         changed_files = self.repo.modified_files
 
-        self.repo.add(untracked_files)
-        self.repo.stage(changed_files)
+        if untracked_files or changed_files:
+            self.repo.add(untracked_files)
+            self.repo.stage(changed_files)
 
-        self.repo.commit(name="ABC Bot", message="Backup")
+            self.repo.commit(name="ABC Bot", message="Backup")
+            return
+
+        print "Nothing to commit, working tree clean :)"
 
     def push(self):
         remote_repo = gittle.Gittle(self.dir_path, origin_uri=self.repo_url)
