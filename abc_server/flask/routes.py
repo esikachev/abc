@@ -1,3 +1,5 @@
+import threading
+
 from abc_server import auth
 from abc_server import config
 from abc_server.flask import abc_server
@@ -5,6 +7,16 @@ from abc_server.flask import request
 from abc_server.git import client as git_client
 from abc_server import settings
 from abc_server import utils
+
+
+def sync_method():
+    configs = config.read_config()
+    for item in configs['watch']:
+        utils.copy_files(item)
+    git = git_client.GitClient()
+    git.commit()
+    git.push()
+    threading.Timer(24 * 3600, sync_method).start()
 
 
 @abc_server.route('/')
@@ -33,10 +45,5 @@ def add():
 
 @abc_server.route('/sync', methods=['POST'])
 def sync():
-    configs = config.read_config()
-    for item in configs['watch']:
-        utils.copy_files(item)
-    git = git_client.GitClient()
-    git.commit()
-    git.push()
+    sync_method()
     return ''
