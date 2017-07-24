@@ -1,8 +1,6 @@
 import argparse
 
-from abc_server import config
 from abc_server.github import client
-from abc_server import utils
 
 
 def get_parser():
@@ -22,10 +20,8 @@ def authenticate():
     if email and password:
         return _authenticate(email, password)
 
-    abc_account = config.read_config(
-        utils.from_home_dir('.abc_account.yaml'))
-    return _authenticate(abc_account['github']['email'],
-                         abc_account['github']['password'])
+    raise Exception("Credentials is not provided. Run 'abc-server -h'"
+                    "for additional information")
 
 
 def _authenticate(email, password):
