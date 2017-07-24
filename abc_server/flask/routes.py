@@ -29,14 +29,6 @@ def init():
     return return_200()
 
 
-@abc_server.route('/add', methods=['POST'])
-def add():
-    with utils.YamlEditor(settings.CONFIG_PATH) as yaml:
-        yaml['watch'].extend(request.json["files"])
-
-    return return_200()
-
-
 @abc_server.route('/sync', methods=['POST'])
 def sync():
     sync_method()

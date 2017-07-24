@@ -23,14 +23,8 @@ email and password from github.
     $ curl -X POST http://127.0.0.1:5000/init
 ..
 
-3. Send REST request for adding files:
 
-.. sourcecode:: console
-
-    $ curl -H "Content-Type: application/json" -X POST -d '{"files": ["~/.bash_profile"]}' http://127.0.0.1:5000/add
-..
-
-4. Send REST request for running sync:
+3. Send REST request for running sync:
 
 .. sourcecode:: console
 
