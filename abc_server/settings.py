@@ -2,7 +2,6 @@ from abc_server import utils
 
 
 DEFAULT_TEMPLATE = {
-    "repo_url": '',
     "watch": [],
 }
 
