@@ -3,7 +3,6 @@ import threading
 from abc_server import auth
 from abc_server import config
 from abc_server.flask import abc_server
-from abc_server.flask import request
 from abc_server.flask import jsonify
 from abc_server.git import client as git_client
 from abc_server import settings
@@ -25,14 +24,6 @@ def init():
 
     git = git_client.GitClient(repo_url=repo.ssh_url)
     git.clone()
-
-    return return_200()
-
-
-@abc_server.route('/add', methods=['POST'])
-def add():
-    with utils.YamlEditor(settings.CONFIG_PATH) as yaml:
-        yaml['watch'].extend(request.json["files"])
 
     return return_200()
 
