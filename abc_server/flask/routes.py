@@ -5,7 +5,6 @@ from abc_server import config
 from abc_server.flask import abc_server
 from abc_server.flask import jsonify
 from abc_server.git import client as git_client
-from abc_server import settings
 from abc_server import utils
 
 
